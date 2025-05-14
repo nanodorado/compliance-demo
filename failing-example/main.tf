@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "bad_bucket" {
   bucket = "my-public-bucket"
-  acl    = "public-read"  # ❌ PCI, SOC2, ISO 27001
+  acl    = "public-read"  # Not compliant PCI, SOC2, ISO 27001
 }
 
 resource "aws_security_group" "open_sg" {
@@ -14,7 +14,7 @@ resource "aws_security_group" "open_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # ❌ SOC2, ISO 27001
+    cidr_blocks = ["0.0.0.0/0"]  # Not compliant SOC2, ISO 27001
   }
 }
 
@@ -25,6 +25,6 @@ resource "aws_db_instance" "db" {
   name                 = "exampledb"
   username             = "foo"
   password             = "bar"
-  publicly_accessible  = true           # ❌ PCI-DSS
+  publicly_accessible  = true           # Not compliant PCI-DSS
   skip_final_snapshot  = true
 }

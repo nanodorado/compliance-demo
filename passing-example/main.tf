@@ -4,29 +4,29 @@ provider "aws" {
 
 resource "aws_s3_bucket" "secure_bucket" {
   bucket = "my-secure-bucket"
-  acl    = "private"  # ✅ Fixed: No public access (SOC 2, PCI-DSS, ISO 27001)
+  acl    = "private"  # Fixed: No public access (SOC 2, PCI-DSS, ISO 27001)
 
   versioning {
-    enabled = true  # ✅ Recommended: S3 versioning for auditability
+    enabled = true  # Recommended: S3 versioning for auditability
   }
 
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"  # ✅ Fixed: Encryption at rest (HIPAA, GDPR, PCI-DSS)
+        sse_algorithm = "AES256"  # Fixed: Encryption at rest (HIPAA, GDPR, PCI-DSS)
       }
     }
   }
 
   logging {
     target_bucket = "my-logging-bucket"
-    target_prefix = "log/"  # ✅ Recommended: Enable access logging (SOC 2, ISO 27001)
+    target_prefix = "log/"  # Recommended: Enable access logging (SOC 2, ISO 27001)
   }
 
   lifecycle_rule {
     enabled = true
     noncurrent_version_expiration {
-      days = 30  # ✅ Optional: Data retention enforcement (GDPR, CCPA)
+      days = 30  # Optional: Data retention enforcement (GDPR, CCPA)
     }
   }
 
@@ -43,7 +43,7 @@ resource "aws_security_group" "restricted_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.0.0/24"]  # ✅ Fixed: No 0.0.0.0/0, limited access (ISO 27001, SOC 2)
+    cidr_blocks = ["192.168.0.0/24"]  # Fixed: No 0.0.0.0/0, limited access (ISO 27001, SOC 2)
   }
 
   egress {
@@ -60,11 +60,11 @@ resource "aws_db_instance" "secure_db" {
   instance_class          = "db.t3.micro"
   name                    = "securedb"
   username                = "admin"
-  password                = "strongerpassword123!"  # ✅ Warning: Use secrets manager in production
-  publicly_accessible     = false                   # ✅ Fixed: No public DB exposure (HIPAA, PCI-DSS)
-  skip_final_snapshot     = false                   # ✅ Fixed: Create snapshot before destroy (ISO 27001)
-  backup_retention_period = 7                       # ✅ Best practice: Enable backups (SOC 2, PCI)
-  storage_encrypted       = true                    # ✅ Fixed: Encrypt DB storage (HIPAA, PCI-DSS)
+  password                = "strongerpassword123!"  # Warning: Use secrets manager in production
+  publicly_accessible     = false                   # Fixed: No public DB exposure (HIPAA, PCI-DSS)
+  skip_final_snapshot     = false                   # Fixed: Create snapshot before destroy (ISO 27001)
+  backup_retention_period = 7                       # Best practice: Enable backups (SOC 2, PCI)
+  storage_encrypted       = true                    # Fixed: Encrypt DB storage (HIPAA, PCI-DSS)
 
   tags = {
     Environment = "secure"
