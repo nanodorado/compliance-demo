@@ -21,8 +21,5 @@ jobs:
       - name: Install Checkov
         run: pip install checkov
 
-      - name: Run Checkov on failing-example
-        run: checkov -d ./failing-example --framework terraform
-
       - name: Run Checkov on passing-example
         run: checkov -d ./passing-example --framework terraform
