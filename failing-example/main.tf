@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "insecure_bucket" {
   # Missing:
   # - Access logging (violates PCI DSS 10.2, ISO A.12.4)
   # - Public access block (violates GDPR and ISO A.9)
-  # - Lifecycle rules for retention (GDPR Art. 5, PCI DSS 3.1)
+  # - Lifecycle rules for retention (GDPR Art. 5, PCI DSS 3.1) a
 }
 
 # EC2 INSTANCE – POOR SECURITY PRACTICES
