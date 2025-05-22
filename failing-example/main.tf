@@ -58,7 +58,7 @@ resource "aws_db_instance" "insecure_db" {
   # Exposes database to the internet – violates GDPR Art. 32, HIPAA 164.312(e), PCI DSS 1.3.7
 
   skip_final_snapshot = true 
-  # Disables disaster recovery – violates ISO A.17.1.2, PCI DSS 12.10.1, HIPAA 164.308(a)(7)(ii)(B)
+  # Disables disaster recovery – violates ISO A.17.1.2, PCI DSS 12.10.1, HIPAA 164.308(a)(7)(ii)(B
 
   # Missing:
   # - Encryption at rest (PCI DSS 3.4, ISO A.10.1)
